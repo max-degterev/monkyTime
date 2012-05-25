@@ -150,20 +150,21 @@ var monkyTime = function(settings) {
         transform: supports('transform'),
 
         objects: [],
+        activeObjects: {},
         
-        width: gameScreen.width(),
-        height: gameScreen.height()
-    };
-    
-    console.log(game);
+        width: mt.width(),
+        height: mt.height()
+    },
+    i, l;
 
 // ======================================================================================
 // Initializing game objects
 // ======================================================================================
 
-    var GameObject = function(type, settings) {
+    var GameObject = function(type, settings, mx) {
         this.type = type;
         this.options = settings;
+        this.mx = mx;
         
         this.points = this.options.points;
         this.lives = this.options.lives;
@@ -219,8 +220,13 @@ var monkyTime = function(settings) {
     };
 
     for (object in options.objects) {
-        game.objects.push(new GameObject(object, options.objects[object]));
+        for (i = 0; i < options.objects[object].num; i++) {
+            game.objects.push(new GameObject(object, options.objects[object], i));          
+        }
+        game.activeObjects[object] = 0;
     }
+    
+    console.log(game);
 // ======================================================================================
 // Handling screens
 // ======================================================================================
