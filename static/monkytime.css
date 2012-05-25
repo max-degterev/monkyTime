@@ -1,0 +1,379 @@
+/* 
+=======================================================================
+    GLOBAL STUFF
+=======================================================================
+*/
+
+
+@font-face {
+    font-family: 'UpheavalPro';
+    src: url('font/upheavalpro-webfont.woff') format('woff'),
+         url('font/upheavalpro-webfont.ttf') format('truetype'),
+         url('font/upheavalpro-webfont.svg#UpheavalProRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.monkytime {
+    height: 100%;
+    min-height: 415px;
+
+    position: relative;
+    overflow: hidden;
+
+    background-color: #148ace;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(#148ace), to(#1f92db)); /* Saf4+, Chrome */
+    background-image: -webkit-linear-gradient(top, #148ace, #1f92db); /* Chrome 10+, Saf5.1+, iOS 5+ */
+    background-image:    -moz-linear-gradient(top, #148ace, #1f92db); /* FF3.6 */
+    background-image:     -ms-linear-gradient(top, #148ace, #1f92db); /* IE10 */
+    background-image:      -o-linear-gradient(top, #148ace, #1f92db); /* Opera 11.10+ */
+    background-image:         linear-gradient(to bottom, #148ace, #1f92db);
+    
+    font-family: 'UpheavalPro';
+    font-size: 25px;
+    line-height: 30px;
+    color: #ffde00;
+    
+    -webkit-user-select: none;
+       -moz-user-select: none;
+         -o-user-select: none;
+            user-select: none;
+    cursor: default;
+}
+.monkytime a,
+.monkytime a:hover {
+    color: #ffde00;
+}
+
+.monkytime .mt-8bitbutt {
+    height: 30px;
+    padding: 0 20px;
+    
+    position: relative;
+
+    display: inline-block;
+    background: #f00;
+
+    line-height: 26px;
+    text-align: center;
+}
+.monkytime .mt-8bitbutt, .monkytime .mt-8bitbutt::before, .monkytime .mt-8bitbutt::after {
+    background-color: #f00;
+}
+.monkytime .mt-8bitbutt::before, .monkytime .mt-8bitbutt::after {
+    width: 5px;
+    height: 20px;
+    
+    display: block;
+    content: "";
+
+    position: absolute;
+    top: 5px;    
+}
+.monkytime .mt-8bitbutt::before {
+    left: -5px;
+}
+.monkytime .mt-8bitbutt::after {    
+    right: -5px;
+}
+
+/* 
+=======================================================================
+    GAME OBJECTS
+=======================================================================
+*/
+.monkytime .mt-monkey {
+    width: 69px;
+    height: 97px;
+
+    display: block;
+    
+    background: url('monkytime/monkey.png') no-repeat 0 0;
+    background-size: 69px 97px;
+}
+
+.monkytime .mt-monkey-dead {
+    width: 69px;
+    height: 58px;
+
+    display: block;
+
+    background: url('monkytime/monkey_dead.png') no-repeat 0 0;
+    background-size: 69px 58px;
+}
+
+.monkytime .mt-banana {
+    width: 26px;
+    height: 32px;
+
+    display: block;
+
+    background: url('monkytime/banana.png') no-repeat 0 0;
+    background-size: 26px 32px;
+}
+
+.monkytime .mt-bomb {
+    width: 32px;
+    height: 46px;
+
+    display: block;
+
+    background: url('monkytime/bomb.png') no-repeat 0 0;
+    background-size: 32px 46px;
+}
+
+.monkytime .mt-cloud {
+    width: 100px;
+    height: 51px;
+
+    display: block;
+
+    background: url('monkytime/cloud.png') no-repeat 0 0;
+    background-size: 100px 51px;
+}
+
+.monkytime .mt-heart {
+    width: 26px;
+    height: 24px;
+
+    display: block;
+
+    background: url('monkytime/heart.png') no-repeat 0 0;
+    background-size: 26px 24px;
+}
+
+/* 
+=======================================================================
+    SCENERY
+=======================================================================
+*/
+
+.monkytime .mt-cloud {
+    position: absolute;
+    left: 0;
+    bottom: -100%;
+    z-index: 50;
+}
+
+.monkytime .mt-cloud.uno {
+    left: -5%;
+    bottom: 0;
+}
+
+.monkytime .mt-cloud.dos {
+    left: 40%;
+    bottom: -12px;
+}
+
+.monkytime .mt-cloud.tres {
+    left: 90%;
+    bottom: -10px;
+}
+
+.monkytime .mt-ground {
+    width: 100%;
+    height: 22px;
+
+    display: block;
+    
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    
+    z-index: 100;
+    
+    background: url('monkytime/ground.png') repeat-x;
+    background-size: 60px 22px;
+}
+
+/* 
+=======================================================================
+    SCREENS
+=======================================================================
+*/
+
+.monkytime  .mt-screen {
+    padding: 40px 20px 20px;
+
+    display: none;
+    text-align: center;
+}
+    .mt-screen .mt-monkey,
+    .mt-screen .mt-monkey-dead {
+        margin: 20px auto;
+    }
+    
+.monkytime  .mt-screen.active {
+    display: block;
+}
+
+/* Intro screen */
+.monkytime  .mt-introduction-screen {
+    padding-top: 60px;
+}
+    .mt-introduction-screen .mt-8bitbutt {
+        width: 112px;
+
+        margin: 10px auto;
+        display: block;
+    }
+
+/* Start screen */
+.mt-start-screen .mt-8bitbutt {
+    width: 112px;
+
+    margin: 10px auto;
+    display: block;
+}
+
+/* Gave over screen */
+.mt-end-screen .mt-8bitbutt {
+    margin: 10px;
+}
+
+/* Main game screen */
+.mt-game-screen {
+    display: none;
+}
+.mt-game-screen.active {
+    display: block;
+}
+    .mt-game-screen .mt-monkey {
+        position: absolute;
+        left: 40%;
+        bottom: 20px;
+        z-index: 200;
+    }
+
+    .mt-game-screen .mt-game-object {
+        position: absolute;
+        left: 0;
+        top: -50%;
+        z-index: 75;
+    }
+
+    .mt-game-screen .mt-game-lives {
+        width: 78px;
+        height: 24px;
+
+        display: block;
+
+        margin: 5px;
+        
+        position: absolute;
+        left: 0;
+        top: 0;
+        
+        z-index: 100;
+
+        background: url('monkytime/heart.png') repeat-x 0 0;
+        background-size: 26px 24px;
+    }
+        .mt-game-screen .mt-game-lives.lvs5 {
+            width: 65px;
+        }
+        .mt-game-screen .mt-game-lives.lvs4 {
+            width: 52px;
+        }
+        .mt-game-screen .mt-game-lives.lvs3 {
+            width: 39px;
+        }
+        .mt-game-screen .mt-game-lives.lvs2 {
+            width: 26px;
+        }
+        .mt-game-screen .mt-game-lives.lvs1 {
+            width: 13px;
+        }
+        .mt-game-screen .mt-game-lives.warning {
+			-webkit-animation-name: mt-blink;
+			-webkit-animation-duration: .5s;
+			-webkit-animation-iteration-count: infinite;
+			-webkit-animation-timing-function: linear;
+
+			animation-name: blink;
+			animation-duration: .5s;
+			animation-iteration-count: infinite;
+			animation-timing-function: linear;
+            
+        }
+        
+    	@-webkit-keyframes mt-blink {
+    		0% {
+    			opacity: 1;
+    		}
+    		50% {
+    			opacity: 0;
+    		}
+    		100% {
+    			opacity: 1;
+    		}
+    	}
+
+    	@keyframes mt-blink {
+    		0% {
+    			opacity: 1;
+    		}
+    		50% {
+    			opacity: 0;
+    		}
+    		100% {
+    			opacity: 1;
+    		}
+    	}
+
+    .mt-game-screen .mt-game-score {
+        min-width: 45px; /* avoiding jumping when FOUC occurs */
+        height: 32px;
+        
+        margin: 5px;
+        padding-left: 35px;
+
+        display: block;
+        
+        position: absolute;
+        right: 0;
+        top: 0;
+        
+        z-index: 100;
+
+        background: url('monkytime/banana.png') no-repeat 0 0;
+        background-size: 26px 32px;
+    }
+    .mt-game-screen .mt-game-paused {
+        margin-left: -65px;
+        margin-top: -15px;
+        
+        display: none;
+
+        position: absolute;
+        left: 50%;
+        top: 50%;
+    }
+    .mt-game-screen.paused .mt-game-paused {
+        display: block;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
