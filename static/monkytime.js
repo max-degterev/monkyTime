@@ -38,6 +38,7 @@ var monkyTime = function(settings) {
     var options = $.extend({
         debug: true,
         lives: 6,
+        accelmx: 3.5,
         objects: {
             banana: {
                 chance: 1,
@@ -107,51 +108,54 @@ var monkyTime = function(settings) {
 // ======================================================================================
 // Running selectors
 // ======================================================================================
-    var els = {
-        mt: $('#monkytime'),
-        mtScreens: this.mt.find('.mt-screen'),
+    var mt = $('#monkytime'),
+        mtScreens = mt.find('.mt-screen'),
         
         // Basic
-        gameScreen: this.mt.find('#mt-game-screen'),
-        gameObjects: this.gameScreen.find('.mt-game-object'),
-        gameLives: this.gameScreen.find('#mt-game-lives'),
-        gameScore: this.gameScreen.find('#mt-game-lives'),
-        gamePlayer: this.gameScreen.find('#mt-game-player'),
+        gameScreen = mt.find('#mt-game-screen'),
+        gameObjects = gameScreen.find('.mt-game-object'),
+        gameLives = gameScreen.find('#mt-game-lives'),
+        gameScore = gameScreen.find('#mt-game-lives'),
+        gamePlayer = gameScreen.find('#mt-game-player'),
         
         // Screens
-        introScreen: this.mtScreens.filter('.mt-introduction-screen'),
-        startScreen: this.mtScreens.filter('.mt-start-screen'),
-        endScreen: this.mtScreens.filter('.mt-end-screen'),
+        introScreen = mtScreens.filter('.mt-introduction-screen'),
+        startScreen = mtScreens.filter('.mt-start-screen'),
+        endScreen = mtScreens.filter('.mt-end-screen'),
         
         // Buttons
-        buttonStartGame: this.startScreen.find('#sm-game-start'),
-        buttonRestartGame: this.endScreen.find('#sm-game-restart'),
-        buttonEndGame: this.endScreen.find('#sm-game-quit'),
+        buttonStartGame = startScreen.find('#sm-game-start'),
+        buttonRestartGame = endScreen.find('#sm-game-restart'),
+        buttonEndGame = endScreen.find('#sm-game-quit'),
         
         // Game objects
-        gameObjBanana: this.gameObjects.filter('.mt-banana'),
-        gameObjBomb: this.gameObjects.filter('.mt-bomb'),
-        gameObjHeart: this.gameObjects.filter('.mt-heart')
-    };
+        gameObjBanana = gameObjects.filter('.mt-banana'),
+        gameObjBomb = gameObjects.filter('.mt-bomb'),
+        gameObjHeart = gameObjects.filter('.mt-heart');
 
     debug('[MonkyTime]: game initialized');
         
 // ======================================================================================
 // Setting vars
 // ======================================================================================
-    var score = 0,
-        renderedScore = 0,
+    var game = {
+        score: 0,
+        renderedScore: 0,
 
-        lives = options.lives,
+        lives: options.lives,
+        renderedLives: options.lives,
 
-        rendererId,
+        id: 0,
 
-        transform = supports('transform'),
+        transform: supports('transform'),
 
-        objects = [],
+        objects: [],
         
-        gameWidth = gameScreen.width(),
-        gameHeight = gameScreen.height();
+        width: gameScreen.width(),
+        height: gameScreen.height()
+    };
+    
+    console.log(game);
 
 // ======================================================================================
 // Initializing game objects
@@ -161,8 +165,9 @@ var monkyTime = function(settings) {
         this.type = type;
         this.options = settings;
         
-        this.points = settings.points;
-        this.lives = settings.lives;
+        this.points = this.options.points;
+        this.lives = this.options.lives;
+        this.chance = this.options.chance;
     
         this.velocity = 0;
         this.accelerated = false;
@@ -170,11 +175,25 @@ var monkyTime = function(settings) {
         this.x = 0;
         this.y = 0;
         
+        this.active = false;
+        
         this.elem = $('<span class="mt-' + this.type + ' mt-game-object" />');
+        
+        gameScreen.append(this.elem);
     };
-    GameObject.prototype.reset = function() {
+    GameObject.prototype.activate = function() {
+        this.active = true;
+        this.elem.css({
+            display: 'block'
+        });
+    };
+    GameObject.prototype.deactivate = function() {
         this.x = 0;
         this.y = 0;
+        this.active = false;
+        this.elem.css({
+            display: 'none'
+        });
     };
     GameObject.prototype.move = function() {
         if (this.accelerated) {
@@ -185,9 +204,9 @@ var monkyTime = function(settings) {
             this.y += options.accelmx;
         }
 
-        if (this.y >= this.game.height) {
+        if (this.y >= game.height) {
             this.velocity = 0;
-            this.reset();
+            this.deactivate();
         }
     };
     GameObject.prototype.render = function() {
@@ -200,7 +219,7 @@ var monkyTime = function(settings) {
     };
 
     for (object in options.objects) {
-        objects.push(new GameObject(object, options.objects[object]));
+        game.objects.push(new GameObject(object, options.objects[object]));
     }
 // ======================================================================================
 // Handling screens
