@@ -143,10 +143,7 @@ var monkyTime = function(settings) {
         active: false,
 
         score: 0,
-        renderedScore: 0,
-
         lives: options.lives,
-        renderedLives: options.lives,
 
         transform: supports('transform'),
 
@@ -197,7 +194,7 @@ var monkyTime = function(settings) {
         this.x = (Math.random() * (game.width - this.width)) | 0;
         this.y = -(Math.random() * game.height) | 0;
         
-        debug('[MonkyTime]: game object "' + this.type + '" activated');        
+        //debug('[MonkyTime]: game object "' + this.type + '" activated');        
     };
     GameObject.prototype.deactivate = function() {
         this.x = 0;
@@ -208,7 +205,7 @@ var monkyTime = function(settings) {
         this.elem.css({
             display: 'none'
         });
-        debug('[MonkyTime]: game object "' + this.type + '" deactivated');
+        //debug('[MonkyTime]: game object "' + this.type + '" deactivated');
     };
     GameObject.prototype.move = function() {
         if (this.accelerated) {
@@ -243,7 +240,7 @@ var monkyTime = function(settings) {
         this.elem.css({
             left: this.x,
             top: this.y
-        })
+        });
     };
 
     for (object in options.objects) {
@@ -254,11 +251,77 @@ var monkyTime = function(settings) {
         game.activeObjects[object] = 0;
     }
 // ======================================================================================
+// Player logic
+// ======================================================================================
+    var player = {
+        x: 0,
+        y: 0,
+        
+        elem: gamePlayer,
+        
+        width: 0,
+        height: 0,
+        
+        score: 0,
+        lives: options.lives
+    };
+    player.collision = function() {
+        
+    };
+    player.check = function() {
+        
+    };
+    player.move = function(x, y) {
+        x && (this.x = Math.min(Math.max(0, this.x + x), game.width - this.width));
+        y && (this.y = Math.min(Math.max(0, this.y + y), game.height - this.height));
+    };
+    player.render = function() {
+        this.check();
+        
+        this.elem.css({
+            left: this.x
+        });
+    };
+
+    console.log(player);
+// ======================================================================================
 // Game loop
 // ======================================================================================
+    var handleDeviceMotion = function(e) {
+        player.move(e.accelerationIncludingGravity.x * options.accelmx);
+    };
+    var handleMouseMove = function(e) {
+        player.move(e.pageX - player.x);
+    };
+    var gameInit = function() {
+        if (!player.width || !player.height) {
+            player.width = player.elem.width();
+            player.height = player.elem.height();
+        }
+        
+        window.addEventListener('devicemotion', handleDeviceMotion, false);
+        document.addEventListener('mousemove', handleMouseMove, false);
+
+        game.active = true;
+        gameLoop();
+    };
+
+    var gameStop = function() {
+        window.removeEventListener('devicemotion', handleDeviceMotion, false);
+        document.removeEventListener('mousemove', handleMouseMove, false);
+
+        game.active = false;
+    };
+
     var gameLoop = function(timestamp) {
         var i = 0,
             l = game.objects.length;
+            
+        if (!game.active) {// Stop tha game
+            return false;
+        }
+        
+        player.render();
 
         for (; i < l; i++) {
             game.objects[i].render();
@@ -280,9 +343,8 @@ var monkyTime = function(settings) {
         debug('[MonkyTime]: starting the game');
         startScreen.removeClass('active');
         gameScreen.addClass('active');
-        
-        game.active = true;
-        gameLoop();
+
+        gameInit();
     };
     
     var resetGame = function() {
@@ -293,7 +355,7 @@ var monkyTime = function(settings) {
         renderedScore = 0;
         lives = options.lives;
         
-        game.active = false;
+        gameStop();
         
         gameScreen.removeClass('active');
         startScreen.addClass('active');
@@ -301,8 +363,8 @@ var monkyTime = function(settings) {
     
     var endGame = function() {
         debug('[MonkyTime]: quitting the game');
-        
-        game.active = false;
+
+        gameStop();
         
         gameScreen.removeClass('active');
         endScreen.addClass('active');
@@ -338,6 +400,13 @@ var monkyTime = function(settings) {
 // ======================================================================================
 
     var resetObjects = function() {
+        var i = 0,
+            l = game.objects.length;
+
+        for (; i < l; i++) {
+            game.objects[i].deactivate();
+        }
+
         debug('[MonkyTime]: resetting objects');
     };
 // ======================================================================================
