@@ -47,13 +47,13 @@ var monkyTime = function(settings) {
                 lives: 0
             },
             bomb: {
-                chance: .75,
+                chance: .05,
                 num: 1,
                 points: -10,
                 lives: -1
             },
             heart: {
-                chance: .1,
+                chance: .01,
                 num: 1,
                 points: 20,
                 lives: 1
@@ -139,13 +139,14 @@ var monkyTime = function(settings) {
 // Setting vars
 // ======================================================================================
     var game = {
+        id: 0,
+        active: false,
+
         score: 0,
         renderedScore: 0,
 
         lives: options.lives,
         renderedLives: options.lives,
-
-        id: 0,
 
         transform: supports('transform'),
 
@@ -160,11 +161,9 @@ var monkyTime = function(settings) {
 // ======================================================================================
 // Initializing game objects
 // ======================================================================================
-
-    var GameObject = function(type, settings, mx) {
+    var GameObject = function(type, settings) {
         this.type = type;
         this.options = settings;
-        this.mx = mx;
         
         this.points = this.options.points;
         this.lives = this.options.lives;
@@ -172,21 +171,39 @@ var monkyTime = function(settings) {
     
         this.velocity = 0;
         this.accelerated = false;
-        
+
         this.x = 0;
         this.y = 0;
-        
+
         this.active = false;
         
         this.elem = $('<span class="mt-' + this.type + ' mt-game-object" />');
         
         gameScreen.append(this.elem);
     };
-    GameObject.prototype.activate = function() {
+    GameObject.prototype.activate = function(rnd) {
+        rnd || (rnd = Math.random() * this.chance);
+        
+        var rndstr = rnd + '';
+        rnd = +(rndstr.charAt((rndstr.length / 2) + Math.random() + this.chance | 0));
+        
         this.active = true;
+        
         this.elem.css({
             display: 'block'
         });
+
+        if (!this.width || !this.height) {
+            this.width = this.elem.width();
+            this.height = this.elem.height();
+        }
+        
+        this.x = Math.max(0, Math.min((Math.random() * (game.width - this.width)) / rnd, game.width - this.width)) | 0;
+        this.y = Math.min(-this.height, Math.max(-(Math.random() * this.height) / rnd, -game.height)) | 0;
+        
+        console.log(this.x, this.y)
+        
+        debug('[MonkyTime]: game object "' + this.type + '" activated');        
     };
     GameObject.prototype.deactivate = function() {
         this.x = 0;
@@ -195,6 +212,7 @@ var monkyTime = function(settings) {
         this.elem.css({
             display: 'none'
         });
+        debug('[MonkyTime]: game object "' + this.type + '" deactivated');
     };
     GameObject.prototype.move = function() {
         if (this.accelerated) {
@@ -210,7 +228,16 @@ var monkyTime = function(settings) {
             this.deactivate();
         }
     };
-    GameObject.prototype.render = function() {
+    GameObject.prototype.render = function(rnd) {
+        if (!this.active) {
+            if (Math.random() < this.chance || this.chance === 1) {
+                this.activate(rnd);
+            }
+            else {
+                return false;
+            }
+        }
+
         this.move();
         
         this.elem.css({
@@ -221,12 +248,27 @@ var monkyTime = function(settings) {
 
     for (object in options.objects) {
         for (i = 0; i < options.objects[object].num; i++) {
-            game.objects.push(new GameObject(object, options.objects[object], i));          
+            game.objects.push(new GameObject(object, options.objects[object], i));
+            debug('[MonkyTime]: game object "' + object + '" initialized');
         }
         game.activeObjects[object] = 0;
     }
-    
-    console.log(game);
+// ======================================================================================
+// Game loop
+// ======================================================================================
+    var gameLoop = function(timestamp) {
+        var i = 0,
+            l = game.objects.length;
+            
+        timestamp || (timestamp = Date.now());
+
+        for (; i < l; i++) {
+            game.objects[i].render(timestamp);
+        }
+        
+        game.active && (game.id = requestAnimationFrame(gameLoop));
+    };
+
 // ======================================================================================
 // Handling screens
 // ======================================================================================
@@ -240,6 +282,9 @@ var monkyTime = function(settings) {
         debug('[MonkyTime]: starting the game');
         startScreen.removeClass('active');
         gameScreen.addClass('active');
+        
+        game.active = true;
+        gameLoop();
     };
     
     var resetGame = function() {
@@ -250,12 +295,16 @@ var monkyTime = function(settings) {
         renderedScore = 0;
         lives = options.lives;
         
+        game.active = false;
+        
         gameScreen.removeClass('active');
         startScreen.addClass('active');
     };
     
     var endGame = function() {
         debug('[MonkyTime]: quitting the game');
+        
+        game.active = false;
         
         gameScreen.removeClass('active');
         endScreen.addClass('active');
@@ -306,6 +355,7 @@ var monkyTime = function(settings) {
         start: startGame,
         reset: resetGame,
         end: quitGame,
-        pause: pauseGame
+        pause: pauseGame,
+        status: game
     };
 };
