@@ -47,13 +47,13 @@ var monkyTime = function(settings) {
                 lives: 0
             },
             bomb: {
-                chance: .05,
+                chance: .005,
                 num: 1,
                 points: -10,
                 lives: -1
             },
             heart: {
-                chance: .01,
+                chance: .001,
                 num: 1,
                 points: 20,
                 lives: 1
@@ -181,13 +181,9 @@ var monkyTime = function(settings) {
         
         gameScreen.append(this.elem);
     };
-    GameObject.prototype.activate = function(rnd) {
-        rnd || (rnd = Math.random() * this.chance);
-        
-        var rndstr = rnd + '';
-        rnd = +(rndstr.charAt((rndstr.length / 2) + Math.random() + this.chance | 0));
-        
+    GameObject.prototype.activate = function() {
         this.active = true;
+        game.activeObjects[this.type]++;
         
         this.elem.css({
             display: 'block'
@@ -198,10 +194,8 @@ var monkyTime = function(settings) {
             this.height = this.elem.height();
         }
         
-        this.x = Math.max(0, Math.min((Math.random() * (game.width - this.width)) / rnd, game.width - this.width)) | 0;
-        this.y = Math.min(-this.height, Math.max(-(Math.random() * this.height) / rnd, -game.height)) | 0;
-        
-        console.log(this.x, this.y)
+        this.x = (Math.random() * (game.width - this.width)) | 0;
+        this.y = -(Math.random() * game.height) | 0;
         
         debug('[MonkyTime]: game object "' + this.type + '" activated');        
     };
@@ -209,6 +203,8 @@ var monkyTime = function(settings) {
         this.x = 0;
         this.y = 0;
         this.active = false;
+        game.activeObjects[this.type]--;
+
         this.elem.css({
             display: 'none'
         });
@@ -228,10 +224,14 @@ var monkyTime = function(settings) {
             this.deactivate();
         }
     };
-    GameObject.prototype.render = function(rnd) {
+    GameObject.prototype.render = function() {
         if (!this.active) {
+            if (game.activeObjects[this.type] >= options.objects[this.type].num) {
+                return false;
+            }
+            
             if (Math.random() < this.chance || this.chance === 1) {
-                this.activate(rnd);
+                this.activate();
             }
             else {
                 return false;
@@ -259,11 +259,9 @@ var monkyTime = function(settings) {
     var gameLoop = function(timestamp) {
         var i = 0,
             l = game.objects.length;
-            
-        timestamp || (timestamp = Date.now());
 
         for (; i < l; i++) {
-            game.objects[i].render(timestamp);
+            game.objects[i].render();
         }
         
         game.active && (game.id = requestAnimationFrame(gameLoop));
