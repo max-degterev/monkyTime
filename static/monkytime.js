@@ -237,10 +237,17 @@ var monkyTime = function(settings) {
 
         this.move();
         
-        this.elem.css({
-            left: this.x,
-            top: this.y
-        });
+        if (game.transform) {
+            var props = {};
+            props[game.transform] = 'translate3d(' + this.x + 'px, ' + this.y + 'px, 0)';
+            this.elem.css(props);
+        }
+        else {
+            this.elem.css({
+                left: this.x,
+                top: this.y
+            });
+        }
     };
 
     for (object in options.objects) {
@@ -278,16 +285,24 @@ var monkyTime = function(settings) {
     player.render = function() {
         this.check();
         
-        this.elem.css({
-            left: this.x
-        });
+        if (game.transform) {
+            var props = {};
+            props[game.transform] = 'translate3d(' + this.x + 'px, 0, 0)';
+            console.log(props);
+            this.elem.css(props);
+        }
+        else {
+            this.elem.css({
+                left: this.x
+            });
+        }
     };
 
-    console.log(player);
 // ======================================================================================
 // Game loop
 // ======================================================================================
     var handleDeviceMotion = function(e) {
+        console.log('kalld')
         player.move(e.accelerationIncludingGravity.x * options.accelmx);
     };
     var handleMouseMove = function(e) {
@@ -297,6 +312,10 @@ var monkyTime = function(settings) {
         if (!player.width || !player.height) {
             player.width = player.elem.width();
             player.height = player.elem.height();
+        }
+        
+        if (game.transform) {
+            player.elem.css({ left: 0 });
         }
         
         window.addEventListener('devicemotion', handleDeviceMotion, false);
