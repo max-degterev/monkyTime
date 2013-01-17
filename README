@@ -1,3 +1,7 @@
 Monkey Time
 
 Adventures of an easter-egg monkey
+
+Compile:
+static/coffee/p-game.coffee -> static/js/p-game.js
+static/sass/p-game.scss -> static/css/p-game.css
