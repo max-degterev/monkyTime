@@ -34,8 +34,10 @@
         garbage: 5 * 1000
 
         player:
-            step: 10
-            accel: 1
+            delay: 80
+            # step: 10
+            accel: 1200
+            limit: 1600
 
         modes:
             time: 1000 * 20
@@ -216,6 +218,7 @@
             player: null
 
             time: Date.now()
+            delta: 0
 
             width: block.width()
             height: block.height()
@@ -354,6 +357,7 @@
             @width = 0
             @height = 0
 
+            @acceleration = 0
             @velocity = 0
             @moved = 0
 
@@ -370,21 +374,26 @@
 
         move: (x, keyb) ->
             if x?
-                if (keyb)
-                    if (game.time - @moved < 100)
-                        @velocity += if (x > 0) then options.player.accel else -options.player.accel
-                    else 
-                        @velocity = 0
-                else
-                    @velocity = 0
-
-                @x = Math.min(Math.max(0, @x + x + @velocity), game.width - @width)
+                @acceleration = if (x > 0) then options.player.accel else -options.player.accel
                 @moved = game.time
 
             # if y?
             #     @y = Math.min(Math.max(0, @y + y), game.height - @height)
 
         render: () ->
+            @velocity = @velocity + @acceleration * game.delta
+
+            if (game.time - @moved > options.player.delay)
+                @acceleration = if (@velocity > 0) then options.player.accel else -options.player.accel
+                if (Math.abs(@velocity) < (options.player.limit * .2))
+                    @velocity = 0
+                    @acceleration = 0          
+
+            if (@velocity < -options.player.limit) then @velocity = -options.player.limit
+            if (@velocity > options.player.limit) then @velocity = options.player.limit
+
+            @x = Math.min(Math.max(0, @x + (@velocity * game.delta)), game.width - @width)
+
             if options.transform
                 props = {}
                 props[options.transform] = 'translate3d(' + @x + 'px, ' + @y + 'px, 0)' 
@@ -515,13 +524,16 @@
         gameLoop = () ->
             if game.active
                 frame = requestAnimationFrame(gameLoop)
+                now = Date.now()
 
-                game.time = Date.now()
+                game.delta = (game.time - now) * .001 #reducing to sec
+                game.time = now
+
                 if (game.time - modeStarted > options.modes.time and modesNum > game.mode) then changeMode()
 
                 render()
 
-            if (game.time - garbageCollected > options.garbage) then garbageCollector()
+                if (game.time - garbageCollected > options.garbage) then garbageCollector()
 
         stopLoop = () ->
             cancelAnimationFrame(frame)
@@ -537,7 +549,7 @@
 
                 when 37
                     # LEFT
-                    game.player.move(-options.player.step, true)
+                    game.player.move(-1, true)
 
                 # when 38
                 #     # UP
@@ -545,13 +557,13 @@
 
                 when 39
                     # RIGHT
-                    game.player.move(options.player.step, true)
+                    game.player.move(1, true)
 
                 # when 0
                     # SPACEBAR
 
         handleMouse = (e) ->
-            game.player.move(e.pageX - game.player.x - game.player.width / 2 - game.offset.x)
+            # game.player.move(e.pageX - game.player.x - game.player.width / 2 - game.offset.x)
 
     # --------------------------
     # LOGIC
