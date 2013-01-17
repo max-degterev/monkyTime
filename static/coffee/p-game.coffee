@@ -6,7 +6,7 @@
 (($) ->
     if not Date.now
         Date.now = () ->
-            return +new Date()
+            +new Date()
 
     # =========================================
     # LOAD HIGHSCORES
@@ -101,7 +101,7 @@
         if (num < 100)
             return '0' + num
 
-        return '' + num
+        '' + num
 
     block = $('.p-game')
     win = $(window)
@@ -241,17 +241,14 @@
         calculateOffset()
         win.on('resize', calculateOffset)
 
-        return defaults
+        defaults
         )()
 
     # =========================================
     # GAME OBJECTS
     # =========================================
     class Entity
-        constructor: (type, settings) ->
-            @type = type
-            @options = settings       
-
+        constructor: (@type, @options) ->
             @points = @options.points
             @lives = @options.lives
             @chance = @options.chance
@@ -302,7 +299,7 @@
             @vector = 0
 
         _randomVector: () ->
-            return (if Math.random() < .5 then @options.accel else -@options.accel) * (Math.random() + 1)
+            (if Math.random() < .5 then @options.accel else -@options.accel) * (Math.random() + 1)
 
         move: () ->
             if (game.mode >= options.modes.accelerated - 1 and game.time - @accelerated > 150)
