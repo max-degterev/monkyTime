@@ -15,8 +15,11 @@
     scoreboard = []
     highscore = 0
 
+    # api = '/api/v1.1/game/score.json'
+    api = 'api/score.php'
+
     $.ajax
-        url: '/api/v1.1/game/score.json'
+        url: api
         type: 'GET'
         success: (res) ->
             if res.length
@@ -163,7 +166,7 @@
             json = JSON.stringify(result)
 
             $.ajax
-                url: '/api/v1.1/game/score.json'
+                url: api
                 data:
                     signature: md5(json)
                     data: btoa(json)
