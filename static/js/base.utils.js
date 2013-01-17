@@ -1,3 +1,5 @@
+S = {};
+
 S.browser = {
     isOpera: ('opera' in window),
     isFirefox: (navigator.userAgent.indexOf('Firefox') !== -1),

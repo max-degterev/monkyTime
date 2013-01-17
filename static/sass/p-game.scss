@@ -1,0 +1,363 @@
+@font-face {
+    font-family: 'UpheavalPro';
+    src: url('game/font/upheavalpro-webfont.eot');
+    src: url('game/font/upheavalpro-webfont.woff') format('woff'),
+         url('game/font/upheavalpro-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@import 'css/mixins.scss';
+
+html.game {
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+    background: #173152 url('img/errors/bglight.jpg') no-repeat center center;
+
+    @include helper_noselect();
+
+    body {
+        background: none;
+    }
+}
+
+.p-game {
+/* 
+=======================================================================
+    GLOBAL STUFF
+=======================================================================
+*/
+    width: 960px;
+    height: 640px;
+
+    margin-left: -480px;
+    margin-top: -320px;
+
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+    overflow: hidden;
+
+    @include vertical-gradient(#148ace, #1f92db);
+    @include box-shadow(0 1px 5px rgba(0, 0, 0, .5));
+    
+    font-family: 'UpheavalPro';
+    font-size: 25px;
+    line-height: 30px;
+    color: #ffde00;
+
+    @include helper_noselect();
+
+    a,
+    a:hover {
+        color: #ffde00;
+    }
+
+    .ebutt {
+        height: 30px;
+        padding: 0 20px;
+        
+        position: relative;
+
+        display: inline-block;
+        background: #f00;
+
+        font-size: 26px;
+        line-height: 26px;
+        text-align: center;
+        cursor: pointer;
+
+        &:before,
+        &:after {
+            width: 5px;
+            height: 20px;
+            
+            display: block;
+            content: "";
+
+            position: absolute;
+            top: 5px;
+
+            background: #f00;
+        }
+
+        &:before {
+            left: -5px;
+        }
+        &:after {    
+            right: -5px;
+        }
+    }
+
+/* 
+=======================================================================
+    GAME OBJECTS
+=======================================================================
+*/
+    .player {
+        display: block;
+        @include sprite('/game/sprites/player.png');
+    }
+
+    .monkey {
+        display: block;
+        @include sprite('/game/sprites/monkey.png');
+    }
+
+    .monkey-dead {
+        display: block;
+        @include sprite('/game/sprites/monkey_dead.png');
+    }
+
+    .banana {
+        display: block;
+        @include sprite('/game/sprites/banana.png');
+    }
+
+    .bomb {
+        display: block;
+        @include sprite('/game/sprites/bomb.png');
+    }
+
+    .cloud {
+        display: block;
+        @include sprite('/game/sprites/cloud.png');
+    }
+
+    .heart {
+        display: block;
+        @include sprite('/game/sprites/heart.png');
+    }
+
+/* 
+=======================================================================
+    SCENERY
+=======================================================================
+*/
+    .game-heaven {
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 100%;
+        z-index: 50;
+
+        .cloud {
+            position: absolute;
+
+            &.uno {
+                left: -5%;
+                top: -86px;
+            }
+
+            &.dos {
+                left: 40%;
+                top: -92px;
+            }
+
+            &.tres {
+                left: 90%;
+                top: -86px;
+            }
+        }
+    }
+    
+
+    .ground {
+        width: 100%;
+        height: 22px;
+
+        display: block;
+        
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        
+        z-index: 999999;
+        
+        background: url('game/ground.png') repeat-x;
+    }
+/* 
+=======================================================================
+    SCREENS
+=======================================================================
+*/
+    .game-screen {
+        display: none;
+
+        font-size: 36px;
+
+        &.active {
+            display: block;
+        }
+    }
+
+    .game-intro {
+        padding-top: 75px;
+
+        text-align: center;
+
+        .monkey {
+            margin: 60px auto;
+        }
+    }
+
+    .game-over {
+        padding-top: 35px;
+
+        text-align: center;
+
+        .game-results {
+            margin: 30px auto;
+            font-size: 48px;
+        }
+
+        .game-scoreboard {
+            width: 185px;
+            margin: 0 auto;
+            text-align: left;
+            font-size: 24px;
+        }
+
+        .ebutt {
+            margin-top: 30px;
+        }
+    }
+
+    .game-highscore {
+        padding-top: 75px;
+
+        text-align: center;
+
+        .game-highscore-form {
+            margin-top: 60px;
+            font-size: 64px;
+            line-height: 64px;
+
+            input {
+                width: 130px;
+                min-width: 0;
+                padding: 2px;
+
+                background: none;
+                border: none;
+                border-bottom: 3px solid #f00;
+
+                font-family: 'UpheavalPro';
+                font-size: 64px;
+                line-height: 64px;
+                color: #ffde00;
+            }
+        }
+
+        .ebutt {
+            width: 100px;
+            margin: 30px auto 0;
+            display: block;
+        }
+    }
+
+/* 
+=======================================================================
+    GAME
+=======================================================================
+*/
+    .game-mainscreen {
+        cursor: none;
+
+        .player {
+            margin-top: 548px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 200;
+        }
+
+        .game-object {
+            display: none;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 75;
+
+            &.active {
+                display: block;
+            }
+        }
+
+        .game-lives {
+            width: 78px;
+            height: 24px;
+
+            display: block;
+
+            margin: 5px;
+            
+            position: absolute;
+            left: 0;
+            top: 0;
+            
+            z-index: 100;
+
+            background: url('game/heart.png') repeat-x 0 0;
+
+            &[data-lives="5"] {
+                width: 65px;
+            }
+            &[data-lives="4"] {
+                width: 52px;
+            }
+            &[data-lives="3"] {
+                width: 39px;
+            }
+            &[data-lives="2"] {
+                width: 26px;
+            }
+            &[data-lives="1"] {
+                width: 13px;
+            }
+            &[data-lives="0"] {
+                display: none;
+            }
+        }
+
+        .game-score {
+            min-width: 45px; /* avoiding jumping when FOUC occurs */
+            
+            margin: 5px;
+            padding-left: 35px;
+
+            display: block;
+            
+            position: absolute;
+            right: 0;
+            top: 0;
+            
+            z-index: 100;
+
+            @include sprite('/game/sprites/banana.png');
+            width: auto;
+        }
+
+        .game-paused {
+            margin-left: -75px;
+            margin-top: -15px;
+
+            display: none;
+
+            position: absolute;
+            left: 50%;
+            top: 50%;
+
+            z-index: 100;
+        }
+        &.paused .game-paused {
+            display: inline-block;
+        }
+    }
+
+
+
+}

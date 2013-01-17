@@ -1,7 +1,5 @@
 // @require 'js/jquery.js'
 
-S = {};
-
 // Precached DOM elements
 S.DOM = {};
 S.DOM.win = $(window);
