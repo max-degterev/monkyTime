@@ -24,6 +24,17 @@
       "initialSize" : 34842,
       "fileType" : 8192
     },
+    "\/static\/img\/bglight.jpg" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/img\/bglight.jpg",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/static\/img\/bglight.jpg",
+      "initialSize" : 35964,
+      "fileType" : 4096
+    },
     "\/static\/js\/p-game.js" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 1,
@@ -68,16 +79,17 @@
       "initialSize" : 381,
       "fileType" : 8192
     },
-    "\/static\/img\/sprites\/bomb.png" : {
+    "\/static\/sass\/mixins.scss" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/img\/sprites\/bomb.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/static\/img\/sprites\/bomb.png",
-      "initialSize" : 1245,
-      "fileType" : 8192
+      "inputAbbreviatedPath" : "\/static\/sass\/mixins.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/static\/css\/mixins.css",
+      "fileType" : 4,
+      "debugStyle" : 0
     },
     "\/static\/img\/sprites\/heart.png" : {
       "ignoreWasSetByUser" : 0,
@@ -88,6 +100,17 @@
       "processed" : 0,
       "outputAbbreviatedPath" : "\/static\/img\/sprites\/heart.png",
       "initialSize" : 220,
+      "fileType" : 8192
+    },
+    "\/static\/img\/sprites\/bomb.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/img\/sprites\/bomb.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/static\/img\/sprites\/bomb.png",
+      "initialSize" : 1245,
       "fileType" : 8192
     },
     "\/static\/img\/sprites\/banana.png" : {
@@ -123,6 +146,17 @@
       "outputAbbreviatedPath" : "\/static\/js\/base.utils-ck.js",
       "fileType" : 64
     },
+    "\/preview.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/preview.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/preview.png",
+      "initialSize" : 45926,
+      "fileType" : 8192
+    },
     "\/static\/css\/reset.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -152,17 +186,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
-    "\/static\/img\/sprites\/monkey_dead.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/img\/sprites\/monkey_dead.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/static\/img\/sprites\/monkey_dead.png",
-      "initialSize" : 681,
-      "fileType" : 8192
-    },
     "\/static\/js\/rAF.polyfill.js" : {
       "ignoreWasSetByUser" : 1,
       "ignore" : 1,
@@ -174,6 +197,17 @@
       "outputAbbreviatedPath" : "\/static\/js\/rAF.polyfill-ck.js",
       "fileType" : 64
     },
+    "\/static\/img\/sprites\/monkey_dead.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/img\/sprites\/monkey_dead.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/static\/img\/sprites\/monkey_dead.png",
+      "initialSize" : 681,
+      "fileType" : 8192
+    },
     "\/static\/js\/hash\/md5.js" : {
       "ignoreWasSetByUser" : 1,
       "ignore" : 1,
@@ -183,6 +217,17 @@
       "outputStyle" : 1,
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/static\/js\/hash\/md5-ck.js",
+      "fileType" : 64
+    },
+    "\/static\/js\/hash\/base64.js" : {
+      "ignoreWasSetByUser" : 1,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/js\/hash\/base64.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/static\/js\/hash\/base64-ck.js",
       "fileType" : 64
     },
     "\/static\/js\/base.js" : {
@@ -196,18 +241,6 @@
       "outputAbbreviatedPath" : "\/static\/js\/base-ck.js",
       "fileType" : 64
     },
-    "\/static\/coffee\/p-game.coffee" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 1,
-      "inputAbbreviatedPath" : "\/static\/coffee\/p-game.coffee",
-      "checkOutputStyle" : 0,
-      "minifyOutput" : 1,
-      "outputAbbreviatedPath" : "\/static\/js\/p-game.js",
-      "outputStyle" : 0,
-      "fileType" : 32
-    },
     "\/index.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -219,23 +252,24 @@
     },
     "\/static\/css\/p-game.css" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
       "inputAbbreviatedPath" : "\/static\/css\/p-game.css",
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
-    "\/static\/js\/hash\/base64.js" : {
-      "ignoreWasSetByUser" : 1,
-      "ignore" : 1,
+    "\/static\/sass\/p-game.scss" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/js\/hash\/base64.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/static\/js\/hash\/base64-ck.js",
-      "fileType" : 64
+      "inputAbbreviatedPath" : "\/static\/sass\/p-game.scss",
+      "outputStyle" : 0,
+      "shouldRunBless" : 0,
+      "outputAbbreviatedPath" : "\/static\/css\/p-game.css",
+      "fileType" : 4,
+      "debugStyle" : 0
     },
     "\/static\/img\/banana.png" : {
       "ignoreWasSetByUser" : 0,
@@ -248,6 +282,18 @@
       "initialSize" : 775,
       "fileType" : 8192
     },
+    "\/static\/coffee\/p-game.coffee" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 1,
+      "inputAbbreviatedPath" : "\/static\/coffee\/p-game.coffee",
+      "checkOutputStyle" : 0,
+      "minifyOutput" : 1,
+      "outputAbbreviatedPath" : "\/static\/js\/p-game.js",
+      "outputStyle" : 0,
+      "fileType" : 32
+    },
     "\/static\/css\/m-inputs.css" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -257,16 +303,14 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
-    "\/static\/img\/bglight.jpg" : {
+    "\/static\/css\/_p-game.css" : {
       "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
+      "ignore" : 1,
       "hidden" : 0,
       "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/img\/bglight.jpg",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/static\/img\/bglight.jpg",
-      "initialSize" : 35964,
-      "fileType" : 4096
+      "inputAbbreviatedPath" : "\/static\/css\/_p-game.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
     }
   },
   "manualImportLinks" : [

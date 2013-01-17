@@ -1,20 +1,20 @@
 @font-face {
     font-family: 'UpheavalPro';
-    src: url('game/font/upheavalpro-webfont.eot');
-    src: url('game/font/upheavalpro-webfont.woff') format('woff'),
-         url('game/font/upheavalpro-webfont.ttf') format('truetype');
+    src: url('../font/upheavalpro-webfont.eot');
+    src: url('../font/upheavalpro-webfont.woff') format('woff'),
+         url('../font/upheavalpro-webfont.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
 }
 
-@import 'css/mixins.scss';
+@import 'mixins.scss';
 
 html.game {
     width: 100%;
     height: 100%;
 
     overflow: hidden;
-    background: #173152 url('img/errors/bglight.jpg') no-repeat center center;
+    background: #173152 url('../img/bglight.jpg') no-repeat center center;
 
     @include helper_noselect();
 
@@ -99,37 +99,58 @@ html.game {
 */
     .player {
         display: block;
-        @include sprite('/game/sprites/player.png');
+        width: 50px;
+        height: 70px;
+        background: transparent url("../img/sprites/player.png") no-repeat;
+        background-size: 50px 70px;
     }
 
     .monkey {
         display: block;
-        @include sprite('/game/sprites/monkey.png');
+        width: 138px;
+        height: 194px;
+        background: transparent url("../img/sprites/monkey.png") no-repeat;
+        background-size: 138px 194px;
     }
 
     .monkey-dead {
         display: block;
-        @include sprite('/game/sprites/monkey_dead.png');
+        width: 138px;
+        height: 117px;
+        background: transparent url("../img/sprites/monkey_dead.png") no-repeat;
+        background-size: 138px 117px;
     }
 
     .banana {
         display: block;
-        @include sprite('/game/sprites/banana.png');
+        width: 26px;
+        height: 32px;
+        background: transparent url("../img/sprites/banana.png") no-repeat;
+        background-size: 26px 32px;
     }
 
     .bomb {
         display: block;
-        @include sprite('/game/sprites/bomb.png');
+        width: 32px;
+        height: 46px;
+        background: transparent url("../img/sprites/bomb.png") no-repeat;
+        background-size: 32px 46px;
     }
 
     .cloud {
         display: block;
-        @include sprite('/game/sprites/cloud.png');
+        width: 200px;
+        height: 102px;
+        background: transparent url("../img/sprites/cloud.png") no-repeat;
+        background-size: 200px 102px;
     }
 
     .heart {
         display: block;
-        @include sprite('/game/sprites/heart.png');
+        width: 26px;
+        height: 24px;
+        background: transparent url("../img/sprites/heart.png") no-repeat;
+        background-size: 26px 24px;
     }
 
 /* 
@@ -177,7 +198,7 @@ html.game {
         
         z-index: 999999;
         
-        background: url('game/ground.png') repeat-x;
+        background: url('../img/ground.png') repeat-x;
     }
 /* 
 =======================================================================
@@ -301,7 +322,7 @@ html.game {
             
             z-index: 100;
 
-            background: url('game/heart.png') repeat-x 0 0;
+            background: url('../img/heart.png') repeat-x 0 0;
 
             &[data-lives="5"] {
                 width: 65px;
@@ -337,8 +358,9 @@ html.game {
             
             z-index: 100;
 
-            @include sprite('/game/sprites/banana.png');
-            width: auto;
+            height: 32px;
+            background: transparent url("../img/sprites/banana.png") no-repeat;
+            background-size: 26px 32px;
         }
 
         .game-paused {
