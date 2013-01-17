@@ -214,64 +214,62 @@ html.game {
       width: 100px;
       margin: 30px auto 0;
       display: block; }
-  .p-game .game-mainscreen {
-    cursor: none; }
-    .p-game .game-mainscreen .player {
-      margin-top: 548px;
-      position: absolute;
-      left: 0;
-      top: 0;
-      z-index: 200; }
-    .p-game .game-mainscreen .game-object {
-      display: none;
-      position: absolute;
-      left: 0;
-      top: 0;
-      z-index: 75; }
-      .p-game .game-mainscreen .game-object.active {
-        display: block; }
-    .p-game .game-mainscreen .game-lives {
-      width: 78px;
-      height: 24px;
-      display: block;
-      margin: 5px;
-      position: absolute;
-      left: 0;
-      top: 0;
-      z-index: 100;
-      background: url("../img/heart.png") repeat-x 0 0; }
-      .p-game .game-mainscreen .game-lives[data-lives="5"] {
-        width: 65px; }
-      .p-game .game-mainscreen .game-lives[data-lives="4"] {
-        width: 52px; }
-      .p-game .game-mainscreen .game-lives[data-lives="3"] {
-        width: 39px; }
-      .p-game .game-mainscreen .game-lives[data-lives="2"] {
-        width: 26px; }
-      .p-game .game-mainscreen .game-lives[data-lives="1"] {
-        width: 13px; }
-      .p-game .game-mainscreen .game-lives[data-lives="0"] {
-        display: none; }
-    .p-game .game-mainscreen .game-score {
-      min-width: 45px;
-      /* avoiding jumping when FOUC occurs */
-      margin: 5px;
-      padding-left: 35px;
-      display: block;
-      position: absolute;
-      right: 0;
-      top: 0;
-      z-index: 100;
-      height: 32px;
-      background: transparent url("../img/sprites/banana.png") no-repeat;
-      background-size: 26px 32px; }
-    .p-game .game-mainscreen .game-paused {
-      margin-left: -75px;
-      margin-top: -15px;
-      display: none;
-      position: absolute;
-      left: 50%;
-      top: 50%;
-      z-index: 100; }
-    .p-game .game-mainscreen.paused .game-paused {
-      display: inline-block; }
+  .p-game .game-mainscreen .player {
+    margin-top: 548px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 200; }
+  .p-game .game-mainscreen .game-object {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 75; }
+    .p-game .game-mainscreen .game-object.active {
+      display: block; }
+  .p-game .game-mainscreen .game-lives {
+    width: 78px;
+    height: 24px;
+    display: block;
+    margin: 5px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    background: url("../img/heart.png") repeat-x 0 0; }
+    .p-game .game-mainscreen .game-lives[data-lives="5"] {
+      width: 65px; }
+    .p-game .game-mainscreen .game-lives[data-lives="4"] {
+      width: 52px; }
+    .p-game .game-mainscreen .game-lives[data-lives="3"] {
+      width: 39px; }
+    .p-game .game-mainscreen .game-lives[data-lives="2"] {
+      width: 26px; }
+    .p-game .game-mainscreen .game-lives[data-lives="1"] {
+      width: 13px; }
+    .p-game .game-mainscreen .game-lives[data-lives="0"] {
+      display: none; }
+  .p-game .game-mainscreen .game-score {
+    min-width: 45px;
+    /* avoiding jumping when FOUC occurs */
+    margin: 5px;
+    padding-left: 35px;
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 100;
+    height: 32px;
+    background: transparent url("../img/sprites/banana.png") no-repeat;
+    background-size: 26px 32px; }
+  .p-game .game-mainscreen .game-paused {
+    margin-left: -75px;
+    margin-top: -15px;
+    display: none;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 100; }
+  .p-game .game-mainscreen.paused .game-paused {
+    display: inline-block; }
