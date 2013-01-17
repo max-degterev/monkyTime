@@ -1,0 +1,334 @@
+@font-face {
+  font-family: 'UpheavalPro';
+  src: url(../font/upheavalpro-webfont.eot);
+  src: url(../font/upheavalpro-webfont.woff) format("woff"), url(../font/upheavalpro-webfont.ttf) format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+html.game {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #173152 url(../img/bglight.jpg) no-repeat center center;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+html.game body {
+  background: none;
+}
+
+.p-game {
+  /* 
+  =======================================================================
+      GLOBAL STUFF
+  =======================================================================
+  */
+  width: 960px;
+  height: 640px;
+  margin-left: -480px;
+  margin-top: -320px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  overflow: hidden;
+  background-color: #148ace;
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#148ace), to(#1f92db));
+  /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient(top, #148ace, #1f92db);
+  /* Chrome 10+, Saf5.1+, iOS 5+ */
+  background-image: -moz-linear-gradient(top, #148ace, #1f92db);
+  /* FF3.6 */
+  background-image: -ms-linear-gradient(top, #148ace, #1f92db);
+  /* IE10 */
+  background-image: -o-linear-gradient(top, #148ace, #1f92db);
+  /* Opera 11.10+ */
+  background-image: linear-gradient(to bottom, #148ace, #1f92db);
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+  -moz-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
+  font-family: 'UpheavalPro';
+  font-size: 25px;
+  line-height: 30px;
+  color: #ffde00;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  cursor: default;
+  /* 
+  =======================================================================
+      GAME OBJECTS
+  =======================================================================
+  */
+  /* 
+  =======================================================================
+      SCENERY
+  =======================================================================
+  */
+  /* 
+  =======================================================================
+      SCREENS
+  =======================================================================
+  */
+  /* 
+  =======================================================================
+      GAME
+  =======================================================================
+  */
+}
+.p-game a,
+.p-game a:hover {
+  color: #ffde00;
+}
+.p-game .ebutt {
+  height: 30px;
+  padding: 0 20px;
+  position: relative;
+  display: inline-block;
+  background: #f00;
+  font-size: 26px;
+  line-height: 26px;
+  text-align: center;
+  cursor: pointer;
+}
+.p-game .ebutt:before, .p-game .ebutt:after {
+  width: 5px;
+  height: 20px;
+  display: block;
+  content: "";
+  position: absolute;
+  top: 5px;
+  background: #f00;
+}
+.p-game .ebutt:before {
+  left: -5px;
+}
+.p-game .ebutt:after {
+  right: -5px;
+}
+.p-game .player {
+  display: block;
+  width: 50px;
+  height: 70px;
+  background: transparent url("../img/sprites/player.png") no-repeat;
+  -webkit-background-size: 50px 70px;
+  background-size: 50px 70px;
+}
+.p-game .monkey {
+  display: block;
+  width: 138px;
+  height: 194px;
+  background: transparent url("../img/sprites/monkey.png") no-repeat;
+  -webkit-background-size: 138px 194px;
+  background-size: 138px 194px;
+}
+.p-game .monkey-dead {
+  display: block;
+  width: 138px;
+  height: 117px;
+  background: transparent url("../img/sprites/monkey_dead.png") no-repeat;
+  -webkit-background-size: 138px 117px;
+  background-size: 138px 117px;
+}
+.p-game .banana {
+  display: block;
+  width: 26px;
+  height: 32px;
+  background: transparent url("../img/sprites/banana.png") no-repeat;
+  -webkit-background-size: 26px 32px;
+  background-size: 26px 32px;
+}
+.p-game .bomb {
+  display: block;
+  width: 32px;
+  height: 46px;
+  background: transparent url("../img/sprites/bomb.png") no-repeat;
+  -webkit-background-size: 32px 46px;
+  background-size: 32px 46px;
+}
+.p-game .cloud {
+  display: block;
+  width: 200px;
+  height: 102px;
+  background: transparent url("../img/sprites/cloud.png") no-repeat;
+  -webkit-background-size: 200px 102px;
+  background-size: 200px 102px;
+}
+.p-game .heart {
+  display: block;
+  width: 26px;
+  height: 24px;
+  background: transparent url("../img/sprites/heart.png") no-repeat;
+  -webkit-background-size: 26px 24px;
+  background-size: 26px 24px;
+}
+.p-game .game-heaven {
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  z-index: 50;
+}
+.p-game .game-heaven .cloud {
+  position: absolute;
+}
+.p-game .game-heaven .cloud.uno {
+  left: -5%;
+  top: -86px;
+}
+.p-game .game-heaven .cloud.dos {
+  left: 40%;
+  top: -92px;
+}
+.p-game .game-heaven .cloud.tres {
+  left: 90%;
+  top: -86px;
+}
+.p-game .ground {
+  width: 100%;
+  height: 22px;
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 999999;
+  background: url(../img/ground.png) repeat-x;
+}
+.p-game .game-screen {
+  display: none;
+  font-size: 36px;
+}
+.p-game .game-screen.active {
+  display: block;
+}
+.p-game .game-intro {
+  padding-top: 75px;
+  text-align: center;
+}
+.p-game .game-intro .monkey {
+  margin: 60px auto;
+}
+.p-game .game-over {
+  padding-top: 35px;
+  text-align: center;
+}
+.p-game .game-over .game-results {
+  margin: 30px auto;
+  font-size: 48px;
+}
+.p-game .game-over .game-scoreboard {
+  width: 185px;
+  margin: 0 auto;
+  text-align: left;
+  font-size: 24px;
+}
+.p-game .game-over .ebutt {
+  margin-top: 30px;
+}
+.p-game .game-highscore {
+  padding-top: 75px;
+  text-align: center;
+}
+.p-game .game-highscore .game-highscore-form {
+  margin-top: 60px;
+  font-size: 64px;
+  line-height: 64px;
+}
+.p-game .game-highscore .game-highscore-form input {
+  width: 130px;
+  min-width: 0;
+  padding: 2px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid #f00;
+  font-family: 'UpheavalPro';
+  font-size: 64px;
+  line-height: 64px;
+  color: #ffde00;
+}
+.p-game .game-highscore .ebutt {
+  width: 100px;
+  margin: 30px auto 0;
+  display: block;
+}
+.p-game .game-mainscreen {
+  cursor: none;
+}
+.p-game .game-mainscreen .player {
+  margin-top: 548px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 200;
+}
+.p-game .game-mainscreen .game-object {
+  display: none;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 75;
+}
+.p-game .game-mainscreen .game-object.active {
+  display: block;
+}
+.p-game .game-mainscreen .game-lives {
+  width: 78px;
+  height: 24px;
+  display: block;
+  margin: 5px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  background: url(../img/heart.png) repeat-x 0 0;
+}
+.p-game .game-mainscreen .game-lives[data-lives="5"] {
+  width: 65px;
+}
+.p-game .game-mainscreen .game-lives[data-lives="4"] {
+  width: 52px;
+}
+.p-game .game-mainscreen .game-lives[data-lives="3"] {
+  width: 39px;
+}
+.p-game .game-mainscreen .game-lives[data-lives="2"] {
+  width: 26px;
+}
+.p-game .game-mainscreen .game-lives[data-lives="1"] {
+  width: 13px;
+}
+.p-game .game-mainscreen .game-lives[data-lives="0"] {
+  display: none;
+}
+.p-game .game-mainscreen .game-score {
+  min-width: 45px;
+  margin: 5px;
+  padding-left: 35px;
+  display: block;
+  position: absolute;
+  right: 0;
+  top: 0;
+  z-index: 100;
+  width: 26px;
+  height: 32px;
+  background: transparent url("../img/sprites/banana.png") no-repeat;
+  -webkit-background-size: 26px 32px;
+  background-size: 26px 32px;
+  width: auto;
+}
+.p-game .game-mainscreen .game-paused {
+  margin-left: -75px;
+  margin-top: -15px;
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 100;
+}
+.p-game .game-mainscreen.paused .game-paused {
+  display: inline-block;
+}

@@ -1,0 +1,89 @@
+input,
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+textarea {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+}
+input:focus,
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+textarea:focus {
+  outline: none;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+textarea {
+  min-width: 200px;
+  padding: 8px 10px;
+  border: 1px solid #d6d6d6;
+  background: #fff;
+  font-size: 18px;
+  color: #535353;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+input[type="text"]::-webkit-input-placeholder,
+input[type="email"]::-webkit-input-placeholder,
+input[type="password"]::-webkit-input-placeholder,
+input[type="search"]::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+  color: #cccccc;
+}
+input[type="text"]:-ms-input-placeholder,
+input[type="email"]:-ms-input-placeholder,
+input[type="password"]:-ms-input-placeholder,
+input[type="search"]:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+  color: #cccccc;
+}
+input[type="text"]:-moz-placeholder,
+input[type="email"]:-moz-placeholder,
+input[type="password"]:-moz-placeholder,
+input[type="search"]:-moz-placeholder,
+textarea:-moz-placeholder {
+  color: #cccccc;
+}
+input[type="text"].valid,
+input[type="email"].valid,
+input[type="password"].valid,
+input[type="search"].valid,
+textarea.valid {
+  border-color: #83ee8d;
+}
+input[type="text"].invalid,
+input[type="email"].invalid,
+input[type="password"].invalid,
+input[type="search"].invalid,
+textarea.invalid {
+  border-color: #ff9b9b;
+}
+input[type="text"][disabled],
+input[type="email"][disabled],
+input[type="password"][disabled],
+input[type="search"][disabled],
+textarea[disabled] {
+  filter: alpha(opacity=80%);
+  -khtml-opacity: 0.8%;
+  -moz-opacity: 0.8%;
+  opacity: 0.8%;
+  background: #f2f2f2;
+}
+
+textarea {
+  resize: none;
+}
