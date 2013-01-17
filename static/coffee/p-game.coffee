@@ -42,15 +42,15 @@
 
         modes:
             time: 1000 * 20
-            speeds: [5, 8, 12, 16, 23, 25]
+            speeds: [5, 8, 10, 12, 16, 20, 23]
 
-            accelerated: 3
+            accelerated: 4
             randomized: 6
             vector: 2
 
         sudden:
             active: true
-            objects: ['banana', 'banana', 'bomb', 'bomb', 'heart']
+            objects: ['banana', 'banana', 'bomb', 'heart', 'banana', 'bomb']
             num: 15
 
         transform: S.utils.supports('transform')
