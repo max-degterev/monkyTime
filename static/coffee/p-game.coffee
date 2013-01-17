@@ -182,7 +182,7 @@
             if (e.keyCode == 13)
                 saveScore()
             else
-                if (!/^[a-zA-Z]*$/.test(String.fromCharCode(e.keyCode)) and e.keyCode != 8 and e.keyCode != 46)
+                if (!/[a-zA-Z]/.test(String.fromCharCode(e.keyCode)) and e.keyCode != 8 and e.keyCode != 46)
                     e.preventDefault()
 
 
