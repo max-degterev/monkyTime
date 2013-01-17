@@ -1,7 +1,12 @@
 <?
 
 $FILENAME = 'scoreboard.json';
-$scoreboard = json_decode(file_get_contents($FILENAME));
+
+if (file_exists($FILENAME)) {
+    $scoreboard = json_decode(file_get_contents($FILENAME));
+} else {
+    $scoreboard = array();
+}
 
 // function cmp($a, $b) {
 //     if ($a->score == $b->score) {
@@ -14,7 +19,7 @@ if (isset($_POST['signature'])) {
     $newHighScore = base64_decode($_POST['data']);
     $json = json_decode($newHighScore);
 
-    if ($_POST['signature'] === md5($newHighScore) &&  $json->score >= $scoreboard[0]->score) {
+    if ($_POST['signature'] === md5($newHighScore) && (sizeof($scoreboard) === 0 || $json->score >= $scoreboard[0]->score)) {
         array_unshift($scoreboard, $json);
         // usort($scoreboard, "cmp");
 

@@ -18,14 +18,6 @@
     # api = '/api/v1.1/game/score.json'
     api = 'api/score.php'
 
-    $.ajax
-        url: api
-        type: 'GET'
-        success: (res) ->
-            if res.length
-                scoreboard = res
-                highscore = scoreboard[0].score
-
     # =========================================
     # GAME SETTINGS
     # =========================================
@@ -123,11 +115,11 @@
             block.trigger('game::intro')
             log('game::screens::intro')
 
-        showOver = () ->
+        showOver = (unsubscribe) ->
             els.filter('.active').removeClass('active')
             els.filter('.game-over').addClass('active').find('.game-results-final').html(leadZeros(game.score))
 
-            nameEl.off('keydown', limitNameToChars)
+            if unsubscribe then nameEl.off('keydown', limitNameToChars)
             block.trigger('game::over')
             log('game::screens::over')
 
@@ -176,7 +168,7 @@
                     highscore = scoreboard[0].score
 
             updateScoreboard()
-            showOver()
+            showOver(true)
 
         limitNameToChars = (e) ->
             if (e.keyCode == 13)
@@ -185,12 +177,18 @@
                 if (!/[a-zA-Z]/.test(String.fromCharCode(e.keyCode)) and e.keyCode != 8 and e.keyCode != 46)
                     e.preventDefault()
 
-
-        updateScoreboard()
-
         block.find('#game-start').on('click', showGame)
         block.find('#game-retry').on('click', showGame)
         block.find('#game-savescore').on('click', saveScore)
+
+        $.ajax
+            url: api
+            type: 'GET'
+            success: (res) ->
+                if res.length
+                    scoreboard = res
+                    highscore = scoreboard[0].score
+                    updateScoreboard()
 
         {
             intro: showIntro
