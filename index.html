@@ -1,65 +1,76 @@
-<!DOCTYPE HTML>
-<html lang="en-US">
+<!DOCTYPE html>
+<html class="no-js game" lang="ru-RU">
 <head>
     <meta charset="UTF-8">
-	<meta name="MobileOptimized" content="320">
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-	
     <title>MonkeyTime</title>
-    <link rel="stylesheet" href="static/reset.css">
-    <link rel="stylesheet" href="static/monkytime.css">
-    <link rel="stylesheet" href="static/style.css">
+
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="960">
+    <meta name="viewport" content="width=960, initial-scale=0.75, maximum-scale=1, minimum-scale=0.75">
+    <meta http-equiv="cleartype" content="on">
+
+    <link rel="stylesheet" type="text/css" href="static/css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/m-inputs.css" />
+    <link rel="stylesheet" type="text/css" href="static/css/p-game.css" />
 </head>
 <body>
-    <section class="monkytime" id="monkytime">
-        <div class="mt-introduction-screen mt-screen active">
-            <h1>It’s 404, Islander</h1>
-            <span class="mt-monkey-dead"></span>
-            <p class="mt-intro-msg">
-                Попробуйте вернуться на <a class="mt-8bitbutt" href="{% url mobile-index %}">главную</a>
+
+    <section class="l-content p-game" id="l-content">
+        <div class="game-screen game-intro active">
+            <strong class="game-title">It's Monkey time!</strong>
+            <span class="monkey"></span>
+            <span class="ebutt" id="game-start">Start the game</span>
+        </div>
+        <div class="game-screen game-over">
+            <strong class="game-title">Game over</strong>
+
+            <p class="game-results">
+                FINAL SCORE: <span class="game-results-final">000</span>
+            </p>
+
+            <ul class="game-scoreboard"></ul>
+            
+            <span class="ebutt" id="game-retry">Again?</span>
+        </div>
+        <div class="game-screen game-highscore">
+            <strong class="game-title">New highscore!</strong>
+            <p class="game-highscore-form">
+                <input type="text" id="game-player-name" maxlength="3">
+                <label for="game-player-name" class="game-results-final">000</label>
+                <span class="ebutt" id="game-savescore">SAVE</span>
             </p>
         </div>
-        
-        <div class="mt-start-screen mt-screen">
-            <h2>It's MonkeyTime! (tm)</h2>
-            <span class="mt-monkey"></span>
-            <p class="mt-intro-msg">
-                Click to <a class="mt-8bitbutt" id="sm-game-start" href="javascript:void(0);">Start</a> the game
-            </p>
-        </div>
-        
-        <div class="mt-end-screen mt-screen">
-            <h2>Game over, Islander</h2>
-            <span class="mt-monkey-dead"></span>
-            <p class="mt-intro-msg">
-                Again?<br>
-                <a class="mt-8bitbutt" id="sm-game-restart" href="javascript:void(0);">[Y]</a> <a class="mt-8bitbutt" id="sm-game-quit" href="javascript:void(0);">[N]</a>
-            </p>
+        <div class="game-screen game-mainscreen" id="game-mainscreen">
+            <!-- <span class="banana game-object"></span>
+            <span class="banana game-object"></span>
+            <span class="bomb game-object"></span>
+            <span class="heart game-object"></span> -->
+            
+            <span class="player" id="game-player"></span>
+
+            <span class="game-lives" id="game-lives"></span>
+            <span class="game-score" id="game-score">000</span>
+            <span class="game-paused ebutt" id="game-paused">paused</span>
         </div>
 
-        <div class="mt-game-screen" id="mt-game-screen">
-            <!-- <span class="mt-banana mt-game-object"></span>
-            <span class="mt-banana mt-game-object"></span>
-            <span class="mt-bomb mt-game-object"></span>
-            <span class="mt-heart mt-game-object"></span> -->
-            
-            <span class="mt-monkey" id="mt-game-player"></span>
-            
-            <span class="mt-game-lives" id="mt-game-lives"></span>
-            <span class="mt-game-score" id="mt-game-score">000</span>
-            <a class="mt-game-paused mt-8bitbutt" id="mt-game-paused" href="javascript:void(0);">paused</a>
+        <div class="game-heaven">
+            <span class="cloud uno"></span>
+            <span class="cloud dos"></span>
+            <span class="cloud tres"></span>
         </div>
-        
-        <span class="mt-cloud uno"></span>
-        <span class="mt-cloud dos"></span>
-        <span class="mt-cloud tres"></span>
-        <span class="mt-ground"></span>
+        <span class="ground"></span>
     </section>
 
-    <script src="static/zepto.js"></script>
-    <script src="static/zepto.onpress.js"></script>
-    <script src="static/zepto.onshake.js"></script>
-    <script src="static/monkytime.js"></script>
-    <script src="static/script.js"></script>
+    <script type="text/javascript" src="static/js/jquery.js"></script>
+    <script type="text/javascript" src="static/js/base.js"></script>
+    <script type="text/javascript" src="static/js/base.utils.js"></script>
+
+    <script type="text/javascript" src="static/js/rAF.polyfill.js"></script>
+    <script type="text/javascript" src="static/js/hash/base64.js"></script>
+    <script type="text/javascript" src="static/js/hash/md5.js"></script>
+
+    <script type="text/javascript" src="static/js/p-game.js"></script>
+
 </body>
 </html>
