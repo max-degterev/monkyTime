@@ -216,11 +216,20 @@
             player: null
 
             time: Date.now()
+            timeDelta: 0
 
             width: block.width()
             height: block.height()
 
             offset: {}
+
+            keys: 
+                esc: false
+                left: false
+                right: false
+                mouseX: 0
+                mouseY: 0
+
 
         defaults.reset = () ->
             game.active = false
@@ -368,6 +377,35 @@
 
             @move(0, 0)
 
+        update: () ->
+            forceValue = 5800
+            breakValue = 10
+
+            force = 0
+            
+            if game.useMouse
+                forceValue *= 2
+                breakValue *= 1.5
+                direction = game.keys.mouseX - game.player.x - game.player.width / 2 - game.offset.x
+                if Math.abs(direction) < 10
+                    direction = 0
+                else if direction > 0
+                    force = forceValue
+                else if direction < 0
+                    force = -forceValue
+            else
+                if game.keys.left
+                    force = -forceValue
+                else if game.keys.right
+                    force = forceValue
+
+            force -= breakValue * @velocity
+
+            @velocity += force * game.timeDelta
+            @x += @velocity * game.timeDelta
+            @x = Math.max(0, Math.min(game.width-@width, @x))
+
+
         move: (x, keyb) ->
             if x?
                 if (keyb)
@@ -506,6 +544,7 @@
             log('game::engine::gc collected: ' + collected)
 
         render = () ->
+            game.player.update()
             game.player.render()
 
             for ent in game.objects
@@ -515,8 +554,10 @@
         gameLoop = () ->
             if game.active
                 frame = requestAnimationFrame(gameLoop)
-
-                game.time = Date.now()
+                
+                now = Date.now()
+                game.timeDelta = (now - game.time)*0.001
+                game.time = now
                 if (game.time - modeStarted > options.modes.time and modesNum > game.mode) then changeMode()
 
                 render()
@@ -530,28 +571,29 @@
     # CONTROLS
     # --------------------------
         handleKeys = (e) ->
-            switch e.keyCode
-                when 27
-                    # ESC
-                    togglePause()                  
+            codes = 
+                27: 'esc'
+                37: 'left'
+                39: 'right'
+                65: 'left'
+                68: 'right'
 
-                when 37
-                    # LEFT
-                    game.player.move(-options.player.step, true)
+            if !codes[e.keyCode]?
+                return
 
-                # when 38
-                #     # UP
-                #     game.player.move(-options.player.step)
+            game.keys[codes[e.keyCode]] = e.type == 'keydown' ? true : false
+            
+            if game.keys.esc
+                console.log 'toggle'
+                togglePause()
 
-                when 39
-                    # RIGHT
-                    game.player.move(options.player.step, true)
-
-                # when 0
-                    # SPACEBAR
+            game.useMouse = false
 
         handleMouse = (e) ->
-            game.player.move(e.pageX - game.player.x - game.player.width / 2 - game.offset.x)
+            game.keys.mouseX = e.pageX
+            game.keys.mouseY = e.pageY
+            game.useMouse = true
+
 
     # --------------------------
     # LOGIC
@@ -572,6 +614,7 @@
 
         startEngine = () ->
             doc.on('keydown', handleKeys)
+            doc.on('keyup', handleKeys)
             doc.on('mousemove', handleMouse)
             win.on('blur', pauseEngine)
 
@@ -592,6 +635,7 @@
 
         stopEngine = () ->
             doc.off('keydown', handleKeys)
+            doc.off('keyup', handleKeys)
             doc.off('mousemove', handleMouse)
             win.off('blur', pauseEngine)
 
