@@ -2,17 +2,6 @@
   "CodeKitInfo" : "This is a CodeKit project configuration file. It is designed to sync project settings across multiple machines. Modifying the contents of this file can be a poor life decision if you don't know what you're doing. This file is not useful unless accompanied by the project that created it in CodeKit. For more information, see: http:\/\/incident57.com\/codekit",
   "creatorBuild" : "8248",
   "files" : {
-    "\/static\/js\/jquery.os.js" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/js\/jquery.os.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/static\/js\/jquery.os-ck.js",
-      "fileType" : 64
-    },
     "\/static\/img\/sprites\/monkey.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -34,6 +23,17 @@
       "outputAbbreviatedPath" : "\/static\/img\/bglight.jpg",
       "initialSize" : 35964,
       "fileType" : 4096
+    },
+    "\/static\/js\/jquery.os.js" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/js\/jquery.os.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/static\/js\/jquery.os-ck.js",
+      "fileType" : 64
     },
     "\/static\/js\/p-game.js" : {
       "ignoreWasSetByUser" : 0,
@@ -57,17 +57,6 @@
       "outputAbbreviatedPath" : "\/static\/js\/jquery-ck.js",
       "fileType" : 64
     },
-    "\/static\/img\/sprites\/player.png" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 0,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/img\/sprites\/player.png",
-      "processed" : 0,
-      "outputAbbreviatedPath" : "\/static\/img\/sprites\/player.png",
-      "initialSize" : 5083,
-      "fileType" : 8192
-    },
     "\/static\/img\/ground.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -90,6 +79,17 @@
       "outputAbbreviatedPath" : "\/static\/css\/mixins.css",
       "fileType" : 4,
       "debugStyle" : 0
+    },
+    "\/static\/img\/sprites\/player.png" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 0,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/img\/sprites\/player.png",
+      "processed" : 0,
+      "outputAbbreviatedPath" : "\/static\/img\/sprites\/player.png",
+      "initialSize" : 5083,
+      "fileType" : 8192
     },
     "\/static\/img\/sprites\/heart.png" : {
       "ignoreWasSetByUser" : 0,
@@ -135,17 +135,6 @@
       "initialSize" : 558,
       "fileType" : 8192
     },
-    "\/static\/js\/base.utils.js" : {
-      "ignoreWasSetByUser" : 1,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/js\/base.utils.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 0,
-      "outputAbbreviatedPath" : "\/static\/js\/base.utils-ck.js",
-      "fileType" : 64
-    },
     "\/preview.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -156,6 +145,17 @@
       "outputAbbreviatedPath" : "\/preview.png",
       "initialSize" : 45926,
       "fileType" : 8192
+    },
+    "\/static\/js\/base.utils.js" : {
+      "ignoreWasSetByUser" : 1,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/js\/base.utils.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 0,
+      "outputAbbreviatedPath" : "\/static\/js\/base.utils-ck.js",
+      "fileType" : 64
     },
     "\/static\/css\/reset.css" : {
       "ignoreWasSetByUser" : 0,
@@ -186,17 +186,6 @@
       "outputAbbreviatedPath" : "No Output Path",
       "fileType" : 16
     },
-    "\/static\/js\/rAF.polyfill.js" : {
-      "ignoreWasSetByUser" : 1,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/js\/rAF.polyfill.js",
-      "outputStyle" : 1,
-      "syntaxCheckerStyle" : 1,
-      "outputAbbreviatedPath" : "\/static\/js\/rAF.polyfill-ck.js",
-      "fileType" : 64
-    },
     "\/static\/img\/sprites\/monkey_dead.png" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
@@ -208,6 +197,17 @@
       "initialSize" : 681,
       "fileType" : 8192
     },
+    "\/static\/js\/rAF.polyfill.js" : {
+      "ignoreWasSetByUser" : 1,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/js\/rAF.polyfill.js",
+      "outputStyle" : 1,
+      "syntaxCheckerStyle" : 1,
+      "outputAbbreviatedPath" : "\/static\/js\/rAF.polyfill-ck.js",
+      "fileType" : 64
+    },
     "\/static\/js\/hash\/md5.js" : {
       "ignoreWasSetByUser" : 1,
       "ignore" : 1,
@@ -218,6 +218,15 @@
       "syntaxCheckerStyle" : 1,
       "outputAbbreviatedPath" : "\/static\/js\/hash\/md5-ck.js",
       "fileType" : 64
+    },
+    "\/static\/css\/p-game.css" : {
+      "ignoreWasSetByUser" : 0,
+      "ignore" : 1,
+      "hidden" : 0,
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/static\/css\/p-game.css",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 16
     },
     "\/static\/js\/hash\/base64.js" : {
       "ignoreWasSetByUser" : 1,
@@ -241,23 +250,17 @@
       "outputAbbreviatedPath" : "\/static\/js\/base-ck.js",
       "fileType" : 64
     },
-    "\/index.html" : {
+    "\/static\/coffee\/p-game.coffee" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/index.html",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 2048
-    },
-    "\/static\/css\/p-game.css" : {
-      "ignoreWasSetByUser" : 0,
-      "ignore" : 1,
-      "hidden" : 0,
-      "outputPathIsSetByUser" : 0,
-      "inputAbbreviatedPath" : "\/static\/css\/p-game.css",
-      "outputAbbreviatedPath" : "No Output Path",
-      "fileType" : 16
+      "outputPathIsSetByUser" : 1,
+      "inputAbbreviatedPath" : "\/static\/coffee\/p-game.coffee",
+      "checkOutputStyle" : 0,
+      "minifyOutput" : 1,
+      "outputAbbreviatedPath" : "\/static\/js\/p-game.js",
+      "outputStyle" : 0,
+      "fileType" : 32
     },
     "\/static\/sass\/p-game.scss" : {
       "ignoreWasSetByUser" : 0,
@@ -282,17 +285,14 @@
       "initialSize" : 775,
       "fileType" : 8192
     },
-    "\/static\/coffee\/p-game.coffee" : {
+    "\/index.html" : {
       "ignoreWasSetByUser" : 0,
       "ignore" : 0,
       "hidden" : 0,
-      "outputPathIsSetByUser" : 1,
-      "inputAbbreviatedPath" : "\/static\/coffee\/p-game.coffee",
-      "checkOutputStyle" : 0,
-      "minifyOutput" : 1,
-      "outputAbbreviatedPath" : "\/static\/js\/p-game.js",
-      "outputStyle" : 0,
-      "fileType" : 32
+      "outputPathIsSetByUser" : 0,
+      "inputAbbreviatedPath" : "\/index.html",
+      "outputAbbreviatedPath" : "No Output Path",
+      "fileType" : 2048
     },
     "\/static\/css\/m-inputs.css" : {
       "ignoreWasSetByUser" : 0,

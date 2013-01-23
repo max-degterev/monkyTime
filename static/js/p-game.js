@@ -24,8 +24,9 @@
     lives: 6,
     garbage: 5 * 1000,
     player: {
-      step: 10,
-      accel: 1
+      delay: 80,
+      accel: 1200,
+      limit: 1600
     },
     modes: {
       time: 1000 * 20,
@@ -335,6 +336,7 @@
       this.el = block.find('.player');
       this.width = 0;
       this.height = 0;
+      this.acceleration = 0;
       this.velocity = 0;
       this.moved = 0;
       this.offset = parseInt($(this.el).css('margin-top'));
@@ -379,16 +381,7 @@
 
     Player.prototype.move = function(x, keyb) {
       if (x != null) {
-        if (keyb) {
-          if (game.time - this.moved < 100) {
-            this.velocity += x > 0 ? options.player.accel : -options.player.accel;
-          } else {
-            this.velocity = 0;
-          }
-        } else {
-          this.velocity = 0;
-        }
-        this.x = Math.min(Math.max(0, this.x + x + this.velocity), game.width - this.width);
+        this.acceleration = x > 0 ? options.player.accel : -options.player.accel;
         return this.moved = game.time;
       }
     };
@@ -536,9 +529,9 @@
           changeMode();
         }
         render();
-      }
-      if (game.time - garbageCollected > options.garbage) {
-        return garbageCollector();
+        if (game.time - garbageCollected > options.garbage) {
+          return garbageCollector();
+        }
       }
     };
     stopLoop = function() {
