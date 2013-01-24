@@ -381,30 +381,59 @@
             @move(0, 0)
 
         update: () ->
-            forceValue = 5800
-            breakValue = 10
+            accelerationValue = 2000
+            brakeValue = 3000
+            maxSpeed = 1000
+            acceleration = 0 
+            braking = false
 
-            force = 0
-            
             if game.useMouse
-                forceValue *= 2
-                breakValue *= 1.5
-                direction = game.keys.mouseX - game.player.x - game.player.width / 2 - game.offset.x
-                if Math.abs(direction) < 10
-                    direction = 0
-                else if direction > 0
-                    force = forceValue
-                else if direction < 0
-                    force = -forceValue
+                distance = game.keys.mouseX - game.player.x - game.player.width / 2 - game.offset.x
+                brakeTime = Math.abs(@velocity) / brakeValue
+                brakeDistance = Math.abs(@velocity) * brakeTime - brakeValue * brakeTime * brakeTime * 0.5
+                if @velocity < 0
+                    brakeDistance *= -1
+
+                if distance > 0 and brakeDistance > 0 or distance < 0 and brakeDistance < 0
+                    if Math.abs(distance) <  Math.abs(brakeDistance) 
+                        braking = true
+                
+                if Math.abs(distance) <= 1
+                    @velocity = 0
+                    acceleration = 0
+                else if braking
+                    acceleration = 0
+                else if distance > 0
+                    acceleration = accelerationValue
+                    if @velocity < 0
+                        acceleration += brakeValue
+                else if distance < 0
+                    acceleration = -accelerationValue
+                    if @velocity > 0
+                        acceleration -= brakeValue
+                
             else
                 if game.keys.left
-                    force = -forceValue
+                    acceleration = -accelerationValue
+                    if @velocity > 0
+                        acceleration -= brakeValue
                 else if game.keys.right
-                    force = forceValue
+                    acceleration = accelerationValue
+                    if @velocity < 0
+                        acceleration += brakeValue
+                else
+                    braking = true
 
-            force -= breakValue * @velocity
+            if braking
+                if @velocity > 0
+                    @velocity = Math.max(0, @velocity - brakeValue * game.timeDelta)
+                if @velocity < 0
+                    @velocity = Math.min(0, @velocity + brakeValue * game.timeDelta)
+            else
+                @velocity += acceleration * game.timeDelta
+                @velocity = Math.min(maxSpeed, Math.max(-maxSpeed, @velocity))
 
-            @velocity += force * game.timeDelta
+
             @x += @velocity * game.timeDelta
             @x = Math.max(0, Math.min(game.width-@width, @x))
 

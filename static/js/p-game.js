@@ -351,30 +351,66 @@
     };
 
     Player.prototype.update = function() {
-      var breakValue, direction, force, forceValue;
-      forceValue = 5800;
-      breakValue = 10;
-      force = 0;
+      var acceleration, accelerationValue, brakeDistance, brakeTime, brakeValue, braking, distance, maxSpeed;
+      accelerationValue = 2000;
+      brakeValue = 3000;
+      maxSpeed = 1000;
+      acceleration = 0;
+      braking = false;
       if (game.useMouse) {
-        forceValue *= 2;
-        breakValue *= 1.5;
-        direction = game.keys.mouseX - game.player.x - game.player.width / 2 - game.offset.x;
-        if (Math.abs(direction) < 10) {
-          direction = 0;
-        } else if (direction > 0) {
-          force = forceValue;
-        } else if (direction < 0) {
-          force = -forceValue;
+        distance = game.keys.mouseX - game.player.x - game.player.width / 2 - game.offset.x;
+        brakeTime = Math.abs(this.velocity) / brakeValue;
+        brakeDistance = Math.abs(this.velocity) * brakeTime - brakeValue * brakeTime * brakeTime * 0.5;
+        if (this.velocity < 0) {
+          brakeDistance *= -1;
+        }
+        if (distance > 0 && brakeDistance > 0 || distance < 0 && brakeDistance < 0) {
+          if (Math.abs(distance) < Math.abs(brakeDistance)) {
+            braking = true;
+          }
+        }
+        if (Math.abs(distance) <= 1) {
+          this.velocity = 0;
+          acceleration = 0;
+        } else if (braking) {
+          acceleration = 0;
+        } else if (distance > 0) {
+          acceleration = accelerationValue;
+          if (this.velocity < 0) {
+            acceleration += brakeValue;
+          }
+        } else if (distance < 0) {
+          acceleration = -accelerationValue;
+          if (this.velocity > 0) {
+            acceleration -= brakeValue;
+          }
         }
       } else {
         if (game.keys.left) {
-          force = -forceValue;
+          acceleration = -accelerationValue;
+          if (this.velocity > 0) {
+            acceleration -= brakeValue;
+          }
         } else if (game.keys.right) {
-          force = forceValue;
+          acceleration = accelerationValue;
+          if (this.velocity < 0) {
+            acceleration += brakeValue;
+          }
+        } else {
+          braking = true;
         }
       }
-      force -= breakValue * this.velocity;
-      this.velocity += force * game.timeDelta;
+      if (braking) {
+        if (this.velocity > 0) {
+          this.velocity = Math.max(0, this.velocity - brakeValue * game.timeDelta);
+        }
+        if (this.velocity < 0) {
+          this.velocity = Math.min(0, this.velocity + brakeValue * game.timeDelta);
+        }
+      } else {
+        this.velocity += acceleration * game.timeDelta;
+        this.velocity = Math.min(maxSpeed, Math.max(-maxSpeed, this.velocity));
+      }
       this.x += this.velocity * game.timeDelta;
       return this.x = Math.max(0, Math.min(game.width - this.width, this.x));
     };
