@@ -101,6 +101,10 @@ html.game {
       left: -5px; }
     .p-game .ebutt:after {
       right: -5px; }
+  .p-game iframe {
+    position: absolute;
+    left: -9999px;
+    top: -9999px; }
   .p-game .player {
     display: block;
     width: 50px;
