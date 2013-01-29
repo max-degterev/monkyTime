@@ -23,6 +23,7 @@
     # =========================================
 
     options =
+        music: 'UBVoONryE3s'
         debug: true
         lives: 6
 
@@ -626,8 +627,26 @@
         }
         )()
 
+    music = (->
+        iframe = '<iframe type="text/html" width="1" height="1" 
+                    src="http://www.youtube.com/embed/' + options.music + '?autoplay=1&amp;loop=1&amp;fmt=18&amp;wmode=transparent&amp;rel=0"
+                    wmode="transparent"
+                    allowscriptaccess
+                    frameborder="0">
+                </iframe>'
+        
+        appendPlayer = ->
+            $('body').append(iframe)
+
+        {
+            init: appendPlayer
+        }
+        )()
+
     # =========================================
     # ALL DONE
     # =========================================
     engine.init()
+    music.init() if options.music
+
 )(jQuery)
