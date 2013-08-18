@@ -628,8 +628,8 @@
         )()
 
     music = (->
-        iframe = '<iframe type="text/html" width="1" height="1" 
-                    src="http://www.youtube.com/embed/' + options.music + '?autoplay=1&amp;loop=1&amp;fmt=18&amp;wmode=transparent&amp;rel=0"
+        iframe = '<iframe type="text/html" width="1" height="1"
+                    src="http://www.youtube.com/embed/' + options.music + '?autoplay=1&amp;loop=1&amp;fmt=18&amp;start=38&amp;wmode=transparent&amp;rel=0"
                     wmode="transparent"
                     allowscriptaccess
                     frameborder="0">
