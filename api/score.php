@@ -16,7 +16,7 @@ if (file_exists($FILENAME)) {
 // }
 
 if (isset($_POST['signature'])) {
-    $newHighScore = base64_decode($_POST['data']);
+    $newHighScore = base64_decode($_POST['score']);
     $json = json_decode($newHighScore);
 
     if ($_POST['signature'] === md5($newHighScore) && (sizeof($scoreboard) === 0 || $json->score >= $scoreboard[0]->score)) {

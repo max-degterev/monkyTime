@@ -15,8 +15,8 @@
     scoreboard = []
     highscore = 0
 
-    # api = '/api/v1.1/game/score.json'
-    api = 'api/score.php'
+    # api = '/api/score.php'
+    api = '/api/gamescore'
 
     # =========================================
     # GAME SETTINGS
@@ -148,7 +148,7 @@
         saveScore = () ->
             return unless (val = $.trim(nameEl.val())).length and game.score > highscore
 
-            result = 
+            result =
                 name: val
                 score: game.score
 
@@ -162,7 +162,7 @@
                 url: api
                 data:
                     signature: md5(json)
-                    data: btoa(json)
+                    score: btoa(json)
                 type: 'POST'
                 success: (res) ->
                     scoreboard = res
@@ -229,7 +229,7 @@
 
             game.score = 0
             game.lives = options.lives
-            
+
             game.mode = 0
 
         calculateOffset = () ->
@@ -313,7 +313,7 @@
                 @randomized = game.time
 
             @y += options.modes.speeds[game.mode] + @velocity
-            @x += @vector          
+            @x += @vector
 
             if (@y >= game.height)
                 @deactivate()
@@ -322,24 +322,24 @@
             if not @active and not @remove
                 if (game.activeObjects[@type] >= options.objects[@type].num)
                     return false
-                
+
                 if (Math.random() < @chance or @chance == 1)
                     @activate()
-                else 
+                else
                     return false
 
             @move()
 
             if options.transform
                 props = {}
-                props[options.transform] = 'translate3d(' + @x + 'px, ' + @y + 'px, 0)'        
+                props[options.transform] = 'translate3d(' + @x + 'px, ' + @y + 'px, 0)'
             else
                 props =
                     left: @x
                     top: @y
 
             @el.css(props)
-            
+
     # =========================================
     # PLAYER OBJECT
     # =========================================
@@ -372,7 +372,7 @@
                 if (keyb)
                     if (game.time - @moved < 100)
                         @velocity += if (x > 0) then options.player.accel else -options.player.accel
-                    else 
+                    else
                         @velocity = 0
                 else
                     @velocity = 0
@@ -432,7 +432,7 @@
             for [1..options.sudden.num]
                 ent = new Entity(options.sudden.objects[game.mode], options.objects[options.sudden.objects[game.mode]])
 
-                ent.remove = true               
+                ent.remove = true
                 el.append(ent.el)
                 ent.activate()
 
@@ -532,7 +532,7 @@
             switch e.keyCode
                 when 27
                     # ESC
-                    togglePause()                  
+                    togglePause()
 
                 when 37
                     # LEFT
@@ -584,7 +584,7 @@
             game.player.reset()
 
             game.active = true
-            
+
             gameLoop()
 
             log('game::engine::started')
@@ -634,7 +634,7 @@
                     allowscriptaccess
                     frameborder="0">
                 </iframe>'
-        
+
         appendPlayer = ->
             $('body').append(iframe)
 
